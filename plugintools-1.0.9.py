@@ -39,6 +39,7 @@
 # - Welcome Matrix
 #---------------------------------------------------------------------------
 
+import xbmcvfs
 import xbmc
 import xbmcplugin
 import xbmcaddon
@@ -376,7 +377,7 @@ def add_item( action="" , title="" , plot="" , url="" , thumbnail="" , fanart=""
     listitem.setArt({'icon': thumbnail, 'thumb': thumbnail, 'poster': thumbnail,
                     'fanart': fanart})
     if info_labels is None:
-        info_labels = { "Title" : title, "FileName" : title, "Plot" : plot, "Genre": genre, "dateadded": date, "credits": credits }
+        info_labels = { "Title" : title, "Plot" : plot, "Genre": genre, "dateadded": date, "credits": credits }
     listitem.setInfo( "video", info_labels )
 
     if fanart!="":
@@ -447,7 +448,7 @@ def show_picture(url):
 def get_temp_path():
     _log("get_temp_path")
 
-    dev = xbmc.translatePath( "special://temp/" )
+    dev = xbmcvfs.translatePath( "special://temp/" )
     _log("get_temp_path ->'"+str(dev)+"'")
 
     return dev
@@ -455,7 +456,7 @@ def get_temp_path():
 def get_runtime_path():
     _log("get_runtime_path")
 
-    dev = xbmc.translatePath( __settings__.getAddonInfo('Path') )
+    dev = xbmcvfs.translatePath( __settings__.getAddonInfo('Path') )
     _log("get_runtime_path ->'"+str(dev)+"'")
 
     return dev
@@ -463,7 +464,7 @@ def get_runtime_path():
 def get_data_path():
     _log("get_data_path")
 
-    dev = xbmc.translatePath( __settings__.getAddonInfo('Profile') )
+    dev = xbmcvfs.translatePath( __settings__.getAddonInfo('Profile') )
     
     # Parche para XBMC4XBOX
     if not os.path.exists(dev):
